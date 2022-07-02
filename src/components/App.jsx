@@ -13,12 +13,27 @@ function App() {
       return [...prevNotes, newNote];
     });
   }
+  function handleDeleteButtonClick(noteId) {
+    setNotes((prevNotes) => {
+      return prevNotes.filter((note, index) => {
+        return index !== noteId;
+      });
+    });
+  }
   return (
     <div>
       <Header />
       <NewNoteArea addButtonClick={handleAddButtonClick} />
-      {notes.map((note,i) => {
-        return <Note key={i} title={note.title} content={note.content} />;
+      {notes.map((note, i) => {
+        return (
+          <Note
+            key={i}
+            id={i}
+            title={note.title}
+            content={note.content}
+            deleteButtonClick={handleDeleteButtonClick}
+          />
+        );
       })}
       <Footer />
     </div>
